@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝贝，我错啦🥺</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+
+        /* 温柔渐变背景 */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* 主容器 */
+        .apology-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 标题 */
+        h1 {
+            color: #ff6b6b;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* 道歉文案 */
+        .content {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* 按钮样式 */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-forgive {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-sweet {
+            background: #ffd93d;
+            color: #333;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* 漂浮爱心动画 */
+        .heart {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #ff6b6b;
+            transform: rotate(-45deg);
+            animation: float 3s linear forwards;
+            z-index: 1;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 25px;
+            height: 25px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -12px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 12px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(-45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-700px) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="apology-box">
+        <h1>宝贝，我错啦🥺</h1>
+        <div class="content" id="text">
+            我不该闹小脾气，不该让你不开心<br>
+            你是我最最最重要的人<br>
+            我超级超级超级爱你<br>
+            原谅我这一次好不好～<br>
+            以后我乖乖听你的话，只对你好❤️
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-forgive" onclick="forgive()">原谅我啦</button>
+            <button class="btn btn-sweet" onclick="sweet()">再撒娇一下</button>
+        </div>
+    </div>
+
+    <script>
+        // 原谅按钮
+        function forgive() {
+            document.getElementById('text').innerHTML = `
+            耶！🥳<br>
+            我的宝贝男朋友原谅我啦<br>
+            爱你爱你爱你！<br>
+            我们永远不吵架啦～😘
+            `;
+            createHearts(20);
+        }
+
+        // 撒娇按钮
+        function sweet() {
+            document.getElementById('text').innerHTML = `
+            呜呜呜宝贝～🥺<br>
+            我真的知道错了<br>
+            抱抱我好不好<br>
+            我以后再也不惹你生气了<br>
+            你是我的全世界呀❤️
+            `;
+            createHearts(10);
+        }
+
+        // 生成漂浮爱心
+        function createHearts(num) {
+            for (let i = 0; i < num; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                // 随机位置、大小、时长
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.width = Math.random() * 20 + 15 + 'px';
+                heart.style.height = heart.style.width;
+                heart.style.animationDuration = Math.random() * 2 + 2 + 's';
+                document.body.appendChild(heart);
+                // 动画结束移除
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+
+        // 点击页面自动飘爱心
+        document.addEventListener('click', () => createHearts(3));
+    </script>
+</body>
+</html>
